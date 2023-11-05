@@ -5,7 +5,7 @@ import tkinter as tk
 
 #Window
 window = tk.Tk()
-window.geometry('900x600')
+window.geometry('500x300')
 window.title("S.U.R.F")
 #arrays
 documentArray=["txt", "doc", "docx", "pdf", "ppt", "pptx", "html", "htm", "epub", "xopp", "odt"]
@@ -50,7 +50,7 @@ def organise_files (inputpath):
         else:
             print(outputname + " is going to the shadow realm")
 
-title = tk.Label(window, text = "Welcome to The Simple Unintrusive Reorganized Files", font = 'Calibri 24 bold' )
+title = tk.Label(window, text = "Please input the name of the folder \n you wish to sort.", font = 'Calibri 16 bold' )
 title.pack()
 
 
@@ -61,7 +61,7 @@ title.pack()
 
 
 def Button_click():
-    title.config(text = "Button Clicked")
+    title.config(text = "Yar, your files be sorted")
     #run the SURF command with the entry.get() as an argument, slap that bitch together like a string
     #yessur
     organise_files(entry.get())
@@ -77,8 +77,8 @@ Button.pack(side = 'left')
 input.pack(pady = 30)
 
 #Output Label 
-Output = tk.Label(window, text = "OutPut")
-
-Output.pack()
+#Output = tk.Label(window, text = "OutPut")
+#
+#Output.pack()
 
 window.mainloop()
