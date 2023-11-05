@@ -15,31 +15,73 @@ else:
     file_path = sys.argv[1]
     print("File path:", file_path)
 
-filelist = []
-#toggle this with the recursive flag
-#def list_files_recursively(directory):
-#    for root, dirs, files in os.walk(directory):
-#        for file in files:
-#            file_path = os.path.join(root, file)
-#            filetree.append(file_path)
-#list_files_recursively(file_path)
-filelist = os.listdir(file_path)
-for file in filelist:
-    if file[0] == '.':
-        continue
-    split_string = file.rsplit(".", 1)
-    if len(split_string)==1:
-        continue
-    filename = split_string[0]
-    extension = split_string[1]
-    outputname = file.split('/')[-1]
-    if extension in documentArray:
-        print(outputname + " is going to the documents folder")
-    elif extension in imageArray:
-        print(outputname + " is going to the pictures folder")
-    elif extension in videoArray:
-        print(outputname + " is going to the videos folder")
-    elif extension in musicArray:
-        print(outputname + " is going to the music folder")
-    else:
-        print(outputname + " is going to the shadow realm")
+def organise_files (inputpath):
+    filelist = []
+    #toggle this with the recursive flag
+    #def list_files_recursively(directory):
+    #    for root, dirs, files in os.walk(directory):
+    #        for file in files:
+    #            file_path = os.path.join(root, file)
+    #            filetree.append(file_path)
+    #list_files_recursively(file_path)
+    filelist = os.listdir(inputpath)
+    for file in filelist:
+        if file[0] == '.':
+            continue
+        split_string = file.rsplit(".", 1)
+        if len(split_string)==1:
+            continue
+        filename = split_string[0]
+        extension = split_string[1]
+        outputname = file.split('/')[-1]
+        if extension in documentArray:
+            print(outputname + " is going to the documents folder")
+        elif extension in imageArray:
+            print(outputname + " is going to the pictures folder")
+        elif extension in videoArray:
+            print(outputname + " is going to the videos folder")
+        elif extension in musicArray:
+            print(outputname + " is going to the music folder")
+        else:
+            print(outputname + " is going to the shadow realm")
+
+title = tk.Label(window, text = "Welcome to The Simple Unintrusive Reorganized Files", font = 'Calibri 24 bold' )
+title.pack()
+
+
+import tkinter as tk
+#import file
+#import SURF
+
+
+#Window
+window = tk.Tk()
+window.geometry('900x600')
+window.title("S.U.R.F")
+
+
+def Button_click():
+    title.config(text = "Button Clicked")
+    #run the SURF command with the entry.get() as an argument, slap that bitch together like a string
+    #yessur
+    organise_files(entry.get())
+
+#Title and Format
+title = tk.Label(window, text = "Welcome to The Simple Unintrusive Reorganized Files", font = 'Calibri 24 bold' )
+title.pack()
+
+
+#Inputs
+input = tk.Frame(window)
+entry = tk.Entry(input)
+Button = tk.Button(input, text = "That Was Easy", command = Button_click)
+entry.pack(side = 'left', padx = 10)
+Button.pack(side = 'left')
+input.pack(pady = 30)
+
+#Output Label 
+Output = tk.Label(window, text = "OutPut")
+
+Output.pack()
+
+window.mainloop()
