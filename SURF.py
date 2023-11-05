@@ -1,7 +1,12 @@
 import os
 import shutil
 import sys
+import tkinter as tk
 
+#Window
+window = tk.Tk()
+window.geometry('900x600')
+window.title("S.U.R.F")
 #arrays
 documentArray=["txt", "doc", "docx", "pdf", "ppt", "pptx", "html", "htm", "epub", "xopp", "odt"]
 imageArray=["jpg", "jpeg", "png", "heic", "webp", "gif"]
@@ -9,14 +14,9 @@ videoArray=["mp4", "mov", "avi", "wmv", "webm", "flv", "ogv"]
 musicArray=["mp3", "wav", "alac", "flac", "wma", "m4a", "aiff"]
 
 
-if len(sys.argv) < 2:
-    file_path = "Downloads"
-else:
-    file_path = sys.argv[1]
-    print("File path:", file_path)
-
 def organise_files (inputpath):
     filelist = []
+    userfolder = os.path.expanduser('~')
     #toggle this with the recursive flag
     #def list_files_recursively(directory):
     #    for root, dirs, files in os.walk(directory):
@@ -24,7 +24,7 @@ def organise_files (inputpath):
     #            file_path = os.path.join(root, file)
     #            filetree.append(file_path)
     #list_files_recursively(file_path)
-    filelist = os.listdir(inputpath)
+    filelist = os.listdir(userfolder + '/' + inputpath)
     for file in filelist:
         if file[0] == '.':
             continue
@@ -34,14 +34,19 @@ def organise_files (inputpath):
         filename = split_string[0]
         extension = split_string[1]
         outputname = file.split('/')[-1]
+        #have variable for user folder
         if extension in documentArray:
             print(outputname + " is going to the documents folder")
+            shutil.move(userfolder+'/'+inputpath+'/'+file, userfolder + "/Documents")
         elif extension in imageArray:
             print(outputname + " is going to the pictures folder")
+            shutil.move(userfolder+'/'+inputpath+'/'+file, userfolder + "/Pictures")
         elif extension in videoArray:
             print(outputname + " is going to the videos folder")
+            shutil.move(userfolder+'/'+inputpath+'/'+file, userfolder + "/Videos")
         elif extension in musicArray:
             print(outputname + " is going to the music folder")
+            shutil.move(userfolder+'/'+inputpath+'/'+file, userfolder + "/Music")
         else:
             print(outputname + " is going to the shadow realm")
 
@@ -49,15 +54,10 @@ title = tk.Label(window, text = "Welcome to The Simple Unintrusive Reorganized F
 title.pack()
 
 
-import tkinter as tk
 #import file
 #import SURF
 
 
-#Window
-window = tk.Tk()
-window.geometry('900x600')
-window.title("S.U.R.F")
 
 
 def Button_click():
@@ -66,9 +66,6 @@ def Button_click():
     #yessur
     organise_files(entry.get())
 
-#Title and Format
-title = tk.Label(window, text = "Welcome to The Simple Unintrusive Reorganized Files", font = 'Calibri 24 bold' )
-title.pack()
 
 
 #Inputs
